@@ -5,6 +5,16 @@
     <title>To-do list</title>
 </head>
 <body>
+
+    {% if request.user.is_authenticated %}
+        <p>{{ request.user }}</p>
+        <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+        <a href="{% url 'login' %}">Log in</a>
+    {% endif %}
+
+    <hr>
+
     <h1>To-do list</h1>
     <a href="{% url 'task-create' %}">Add new</a>
     <table>
@@ -19,5 +29,6 @@
         <h3>No items in list</h3>
         {% endfor %}
     </table>
+
 </body>
 </html>
