@@ -14,8 +14,14 @@
     {% endif %}
 
     <hr>
-
     <h1>To-do list</h1>
+
+    <form method="GET">
+        <input type="text" name="search-area", value="{{ search_input }}">
+        <input type="submit" value="Search task">
+    </form>
+    <hr>
+
     <a href="{% url 'task-create' %}">Add new</a>
     <table>
         {% for task in tasks %}

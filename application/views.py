@@ -47,7 +47,7 @@ class RegisterPage(FormView):
 
 
 class TaskList(LoginRequiredMixin, ListView):
-    """Observe all over the task list and the options to view or add some new."""
+    """Observe all over the task list and the options to add some new or search from list."""
     model = Task
     context_object_name = "tasks"
 
@@ -59,6 +59,12 @@ class TaskList(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context["tasks"] = context["tasks"].filter(user=self.request.user)
         context["count"] = context["tasks"].filter(complete=False).count()
+
+        # The search bar for tasks titles realization.
+        search_input = self.request.GET.get("search-area") or ""
+        if search_input:
+            context["tasks"] = context["tasks"].filter(title__startswith=search_input)
+        context["search_input"] = search_input
         return context
 
 
