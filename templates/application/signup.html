@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login page</title>
+    <title>Signup page</title>
 </head>
 <body>
 
-    <h1>Login page</h1>
+    <h1>Sign up</h1>
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Login">
+        <input type="submit" value="Register">
     </form>
 
-    <p>Don't have an account? <a href="{% url "signup" %}">Sign up</a></p>
+    <p>Already have an account? <a href="{% url "login" %}">Login</a></p>
 
 </body>
 </html>
