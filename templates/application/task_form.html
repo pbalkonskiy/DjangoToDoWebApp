@@ -5,12 +5,23 @@
     <title>Task form</title>
 </head>
 <body>
-    <h1>Task form</h1>
-    <a href="{% url 'tasks' %}">Go back</a>
-    <form method="POST" action="">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Submit">
-    </form>
+
+    {% extends "application/main.html" %}
+    {% block content %}
+
+        <div class="header-bar">
+            <a href="{% url "tasks" %}">&#8632; Back</a>
+        </div>
+
+        <div class="card-body">
+            <form method="POST" action="">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input class="button" type="submit" value="Submit">
+            </form>
+        </div>
+
+    {% endblock content %}
+
 </body>
 </html>

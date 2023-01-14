@@ -6,14 +6,28 @@
 </head>
 <body>
 
-    <h1>Sign up</h1>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Register">
-    </form>
+    {% extends "application/main.html" %}
+    {% block content %}
 
-    <p>Already have an account? <a href="{% url "login" %}">Login</a></p>
+        <div class="header-bar">
+            <h1>Sign up</h1>
+        </div>
+
+        <div class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+                <label> {{ form.username.label }} </label>
+                {{ form.username }}
+                <label> {{ form.password1.label }} </label>
+                {{ form.password1 }}
+                <label> {{ form.password2.label }} </label>
+                {{ form.password2 }}
+                <input style="margin-top: 20px; width: 232px;" class="button" type="submit" value="Register">
+            </form>
+            <p>Already have an account? <a href="{% url "login" %}">Login</a></p>
+        </div>
+
+    {% endblock content %}
 
 </body>
 </html>
