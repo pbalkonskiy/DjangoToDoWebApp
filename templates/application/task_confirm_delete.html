@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmation</title>
+</head>
+<body>
+
+    {% extends "application/main.html" %}
+    {% block content %}
+
+        <div class="header-bar">
+            <a href="{% url 'tasks' %}">&#8632; Back</a>
+        </div>
+
+        <div class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+                <p><b>Are you sure you want to delete this task?</b></p>
+                <p>"{{ task }}"</p>
+                <input style="border: 1px solid crimson; background-color: crimson" class="button" type="submit" value="Delete">
+            </form>
+        </div>
+
+    {% endblock content %}
+
+</body>
+</html>

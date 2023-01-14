@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do List</title>
+</head>
+<body>
+
+    {% extends "application/main.html" %}
+    {% block content %}
+
+
+        <div class="header-bar">
+            <div>
+                <h1>Hello, {{ request.user|title }}</h1>
+                <h3 style="margin: 0">You have {{ count }} incomplete task{{ count|pluralize:"s" }}</h3>
+            </div>
+
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'logout' %}">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}">Log in</a>
+            {% endif %}
+        </div>
+
+        <div id="search-add-wrapper">
+            <form method="GET" style="margin-top: 20px;display: flex; ">
+                <input type="text" name="search-area" value="{{ search_input }}">
+                <input class="button" type="submit" value="Search task">
+            </form>
+            <a id="add-link" href="{% url "task-create" %}">&#43;</a>
+        </div>
+
+        <div class="task-items-wrapper">
+            {% for task in tasks %}
+                <div class="task-wrapper">
+                    {% if task.complete %}
+                        <div class="task-title">
+                            <div class="task-complete-icon"></div>
+                            <s><a href="{% url 'task-edit' task.id %}">{{ task }}</a></s>
+                        </div>
+                        <a class="delete-link" href="{% url 'task-delete' task.id %}">&#215;</a>
+                    {% else %}
+                        <div class="task-title">
+                            <div class="task-incomplete-icon"></div>
+                            <a href="{% url 'task-edit' task.id %}">{{ task }}</a>
+                        </div>
+                        <a class="delete-link" href="{% url 'task-delete' task.id %}">&#215;</a>
+                    {% endif %}
+                </div>
+                {% empty %}
+                <p style="margin-left: 10px">No items in list</p>
+            {% endfor %}
+        </div>
+
+    {% endblock content %}
+
+</body>
+</html>
